@@ -7,7 +7,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme, Input } from "antd";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import MainPage from "./container/mainPage/MainPage";
 import Profile from "./container/profile/Profile";
 import Cart from "./container/cart/Cart"; 
@@ -26,6 +26,17 @@ function App() {
   } = theme.useToken();
   
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  let selectedKey;
+  if (location.pathname === '/') {
+    selectedKey = '1';
+  } else if (location.pathname === '/cart') {
+    selectedKey = '2';
+  } else if (location.pathname === '/profile') {
+    selectedKey = '3';
+  }
 
   return (
     <div className="App">
@@ -50,7 +61,7 @@ function App() {
             }}
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={[selectedKey]}
             items={[
               {
                 key: "1",
