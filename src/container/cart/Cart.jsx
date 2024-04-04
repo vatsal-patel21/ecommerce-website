@@ -1,8 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Image } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons'; 
+import { CartContext } from './CartContext';
 
 export default function Cart() {
+  const { cart, setCart } = useContext(CartContext);
+
+  const handleRemoveFromCart = (productId) => {
+    const productToRemove = cart.find(item => item.id === productId);
+    if (productToRemove) {
+        if (productToRemove.quantity > 1) {
+            // Decrease the quantity of the product
+            setCart(cart.map(item =>
+                item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+            ));
+        } else {
+            // Remove the product from the cart
+            setCart(cart.filter(item => item.id !== productId));
+        }
+    }
+};
 
   const columns = [
     {
