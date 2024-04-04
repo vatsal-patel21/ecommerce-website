@@ -44,7 +44,7 @@ function App() {
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="logo">
             <img
-              src="../src/logo.png"
+              src="../src/assets/logo.png"
               alt="logo"
             />
             {!collapsed && <h1 className="appName">VastVoyage</h1>}
