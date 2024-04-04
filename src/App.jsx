@@ -13,6 +13,7 @@ import Profile from "./container/profile/Profile";
 import Cart from "./container/cart/Cart"; 
 import { CartContext } from "./container/cart/CartContext";
 import './App.css'
+import logo from './assets/logo.png';
 
 const { Header, Sider, Content } = Layout;
 
@@ -44,7 +45,7 @@ function App() {
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="logo">
             <img
-              src="../src/assets/logo.png"
+              src={logo}
               alt="logo"
             />
             {!collapsed && <h1 className="appName">VastVoyage</h1>}
