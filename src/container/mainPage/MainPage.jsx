@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Card, Carousel, Pagination, Button } from 'antd';
+import { PlusOutlined, MinusOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { CartContext } from '../cart/CartContext';
 import axios from 'axios';
 import './MainPage.css';
@@ -11,6 +12,7 @@ export default function MainPage({ searchTerm}) {
   const [currentPage, setCurrentPage] = useState(1);
   const { cart, setCart } = useContext(CartContext);
   const [productsPerPage] = useState(4);
+  
 
   useEffect(() => {
       axios.get('https://dummyjson.com/products')
@@ -69,8 +71,22 @@ export default function MainPage({ searchTerm}) {
             };
             setCart(prevCart => [...prevCart, newProduct]);
         }
-    }
-};
+        }
+    };
+    const removeFromCart = (productId) => {
+        const existingProduct = cart.find(item => item.id === productId);
+        if (existingProduct) {
+          if (existingProduct.quantity > 1) {
+            // Decrease the quantity of the existing product
+            setCart(cart.map(item =>
+              item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+            ));
+          } else {
+            // Remove the product from the cart
+            setCart(cart.filter(item => item.id !== productId));
+          }
+        }
+      };
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -94,9 +110,39 @@ export default function MainPage({ searchTerm}) {
                         ))}
                     </Carousel>
                     <Card.Meta title={product.title} description={product.description} />
-                    <Button onClick={() => addToCart(product.id)}>
-                        Add to Cart ({cart.find(item => item.id === product.id)?.quantity || 0})
-                    </Button>
+                    <Button.Group>
+                    {cart.find(item => item.id === product.id) ? (
+                        <>
+                        <Button 
+                            type="primary" 
+                            shape="round" 
+                            onClick={() => removeFromCart(product.id)}>
+                            <MinusOutlined />
+                        </Button>
+                        <Button 
+                            type="primary" 
+                            shape="round" >
+                            {cart.find(item => item.id === product.id).quantity}
+                        </Button>
+                        <Button 
+                            type="primary" 
+                            shape="round" 
+                            onClick={() => addToCart(product.id)}>
+                            <PlusOutlined />
+                        </Button>
+                        </>
+                    ) : (
+                        <Button 
+                            onClick={() => addToCart(product.id)} 
+                            type="primary" 
+                            shape="round" 
+                            icon={<ShoppingCartOutlined />} 
+                            size="middle"
+                            >
+                            Add to Cart
+                        </Button>
+                    )}
+                    </Button.Group>
                 </Card>
             ))}
             <Pagination
