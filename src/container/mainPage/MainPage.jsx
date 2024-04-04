@@ -4,7 +4,7 @@ import { CartContext } from '../cart/CartContext';
 import axios from 'axios';
 
 
-export default function MainPage() {
+export default function MainPage({ searchTerm}) {
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
