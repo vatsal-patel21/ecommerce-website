@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Table, Image } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons'; 
 import { CartContext } from './CartContext';
+import './Cart.css';
 
 export default function Cart() {
   const { cart, setCart } = useContext(CartContext);

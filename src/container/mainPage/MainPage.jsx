@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Card, Carousel, Pagination, Button } from 'antd';
 import { CartContext } from '../cart/CartContext';
 import axios from 'axios';
+import './MainPage.css';
 
 
 export default function MainPage({ searchTerm}) {
