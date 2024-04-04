@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Card, Carousel, Pagination, Button } from 'antd';
+import { CartContext } from '../cart/CartContext';
 import axios from 'axios';
 
 
@@ -7,6 +8,7 @@ export default function MainPage() {
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { cart, setCart } = useContext(CartContext);
   const [productsPerPage] = useState(4);
 
   useEffect(() => {
@@ -45,6 +47,30 @@ export default function MainPage() {
       }
   }, [searchTerm]);
 
+  const addToCart = (productId) => {
+    const productToAdd = products.find(product => product.id === productId);
+    if (productToAdd) {
+        const existingProduct = cart.find(item => item.id === productId);
+        if (existingProduct) {
+            // Increase the quantity of the existing product
+            setCart(cart.map(item =>
+                item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+            ));
+        } else {
+            // Add the new product to the cart
+            const newProduct = {
+                id: productId,
+                quantity: 1,
+                title: productToAdd.title,
+                price: productToAdd.price,
+                thumbnail: productToAdd.images[0],
+                total: productToAdd.price,
+            };
+            setCart(prevCart => [...prevCart, newProduct]);
+        }
+    }
+};
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -68,7 +94,7 @@ export default function MainPage() {
                     </Carousel>
                     <Card.Meta title={product.title} description={product.description} />
                     <Button onClick={() => addToCart(product.id)}>
-                        Add to Cart ()
+                        Add to Cart ({cart.find(item => item.id === product.id)?.quantity || 0})
                     </Button>
                 </Card>
             ))}
