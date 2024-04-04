@@ -113,6 +113,25 @@ Now, open your browser and navigate to `http://localhost:5173` (or whatever port
 
 If you make changes to the code, the browser will automatically refresh the page reflecting the changes.
 
+## Screenshots
+
+Here are some screenshots of the application:
+
+### Main Page
+
+![Main Page](./src/assets/mainpage.png)
+
+### Cart Page
+
+![Cart Page](./src/assets/cart.png)
+
+### Profile Page
+
+![Profile Page](./src/assets/profile.png)
+
+## Live Demo
+
+The application is deployed on Vercel. You can view the live demo [https://vastvoyage.vercel.app/](https://vastvoyage.vercel.app/).
 ## Usage
 
 This application provides a user-friendly interface to browse and shop items. Here's how you can use it:
@@ -126,3 +145,4 @@ This application provides a user-friendly interface to browse and shop items. He
 4. **Profile Section**: The profile section allows you to add your personal details. This information is used to personalize your shopping experience.
 
 Remember to save your changes frequently to ensure that your shopping cart and profile information are up-to-date.
+
