@@ -44,10 +44,10 @@ function App() {
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="logo">
             <img
-              src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+              src="../src/logo.png"
               alt="logo"
             />
-            {!collapsed && <h1 className="appName">Shopify</h1>}
+            {!collapsed && <h1 className="appName">VastVoyage</h1>}
           </div>
           <Menu
             onClick={({ key }) => {
