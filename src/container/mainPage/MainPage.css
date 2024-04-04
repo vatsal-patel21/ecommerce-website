@@ -1,0 +1,28 @@
+/* .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-list .ant-card {
+    margin-bottom: 20px;
+} */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px; /* Add padding around the product list */
+    background-color: #f8f9fa; /* Add a light background color */
+}
+
+.product-list .ant-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add a shadow to the cards */
+    transition: 0.3s; /* Add a transition effect */
+}
+
+.product-list .ant-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Increase the shadow on hover */
+}
+
+
