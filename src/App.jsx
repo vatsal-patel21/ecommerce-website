@@ -10,7 +10,8 @@ import { Layout, Menu, Button, theme, Input } from "antd";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import MainPage from "./container/mainPage/MainPage";
 import Profile from "./container/profile/Profile";
-import Cart from "./container/cart/Cart";
+import Cart from "./container/cart/Cart"; 
+import { CartContext } from "./container/cart/CartContext";
 import './App.css'
 
 const { Header, Sider, Content } = Layout;
@@ -90,11 +91,13 @@ function App() {
               borderRadius: borderRadiusLG,
             }}
           >
+          <CartContext.Provider value={{ cart, setCart }}>
             <Routes>
               <Route path="/" element={<MainPage searchTerm={searchTerm} />} />
               <Route path="/cart" element={<Cart/>} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
+            </CartContext.Provider>
           </Content>
         </Layout>
       </Layout>
